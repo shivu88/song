@@ -259,6 +259,39 @@ body{
   .house-slideshow{
     height:220px;
   }
+  /* 🌸 ROYAL FLOWERS */
+.petal{
+  position:fixed;
+  top:-50px;
+  width:22px;
+  height:22px;
+  background:radial-gradient(circle at 30% 30%, #ffccd5, #ff4d88);
+  border-radius:50%;
+  opacity:0.85;
+  pointer-events:none;
+  animation:fall linear infinite;
+}
+
+/* ✨ GOLD SPARKLES */
+.sparkle{
+  position:fixed;
+  top:-20px;
+  width:8px;
+  height:8px;
+  background:gold;
+  border-radius:50%;
+  box-shadow:0 0 10px gold;
+  opacity:0.9;
+  pointer-events:none;
+  animation:fall linear infinite;
+}
+
+@keyframes fall{
+  to{
+    transform:translateY(110vh) rotate(360deg);
+    opacity:0.4;
+  }
+
 
   #countdown{
     font-size:18px;
@@ -366,6 +399,28 @@ function startInvitation(){
   document.querySelector(".door-right").classList.add("open-right");
 
   document.getElementById("startScreen").style.display="none";
+
+  // 🌸 Continuous Flower Petals
+  setInterval(()=>{
+    let petal=document.createElement("div");
+    petal.className="petal";
+    petal.style.left=Math.random()*100+"vw";
+    petal.style.animationDuration=(5+Math.random()*5)+"s";
+    document.body.appendChild(petal);
+
+    setTimeout(()=>{ petal.remove(); },10000);
+  },400);
+
+  // ✨ Continuous Sparkles
+  setInterval(()=>{
+    let sparkle=document.createElement("div");
+    sparkle.className="sparkle";
+    sparkle.style.left=Math.random()*100+"vw";
+    sparkle.style.animationDuration=(3+Math.random()*4)+"s";
+    document.body.appendChild(sparkle);
+
+    setTimeout(()=>{ sparkle.remove(); },7000);
+  },300);
 }
 
 // Top slideshow
@@ -402,6 +457,7 @@ setInterval(()=>{
 
 </body>
 </html>
+
 
 
 
