@@ -17,31 +17,55 @@ body{
   background:#fdf6f0;
   color:#6b0033;
   text-align:center;
+  overflow-x:hidden;
 }
 
 /* ENTRY SCREEN */
 #startScreen{
   position:fixed;
-  inset:0;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
   background:linear-gradient(to bottom,#fff8dc,#ffffff);
   display:flex;
   align-items:center;
   justify-content:center;
   flex-direction:column;
   z-index:9999;
+  transition:opacity 1.5s ease;
 }
 
 #startScreen button{
-  padding:14px 30px;
-  font-size:18px;
+  padding:15px 35px;
+  font-size:20px;
   background:#b30059;
   color:white;
   border:none;
-  border-radius:30px;
+  border-radius:40px;
   cursor:pointer;
+  box-shadow:0 5px 15px rgba(0,0,0,0.3);
 }
 
-/* SLIDESHOW (50% HEIGHT) */
+/* FLOWER PETALS */
+.petal{
+  position:fixed;
+  top:-50px;
+  width:15px;
+  height:15px;
+  background:pink;
+  border-radius:50%;
+  opacity:0.8;
+  animation:fall linear infinite;
+}
+
+@keyframes fall{
+  to{
+    transform:translateY(110vh) rotate(360deg);
+  }
+}
+
+/* BACKGROUND SLIDESHOW */
 .slideshow{
   width:100%;
   height:50vh;
@@ -61,108 +85,142 @@ body{
 
 /* CONTENT */
 .content{
-  padding:40px 15px;
+  width:100%;
+  display:flex;
+  justify-content:center;
+  padding:50px 15px;
+  background:#fdf6f0;
 }
 
+/* INVITATION CARD */
 .invite-card{
+  width:100%;
   max-width:900px;
-  margin:auto;
-  background:white;
   padding:30px;
+  border:8px solid #b30059;
   border-radius:20px;
-  border:6px solid #b30059;
-  box-shadow:0 10px 30px rgba(0,0,0,0.2);
+  background:white;
+  box-shadow:0 20px 45px rgba(0,0,0,0.25);
 }
 
 /* DIYA */
 .diya{
+  position:relative;
   width:60px;
   margin:20px auto;
-  position:relative;
 }
+
 .diya-base{
   width:60px;
   height:30px;
   background:#b34700;
   border-radius:0 0 40px 40px;
 }
+
 .flame{
   position:absolute;
   bottom:25px;
   left:50%;
   transform:translateX(-50%);
-  width:18px;
-  height:35px;
-  background:radial-gradient(circle,#fff700 0%,#ff9900 70%,transparent 80%);
+  width:20px;
+  height:40px;
+  background:radial-gradient(circle,#fff700 0%,#ff9900 60%,transparent 70%);
   border-radius:50%;
   animation:flicker 0.8s infinite alternate;
 }
+
 @keyframes flicker{
   from{transform:translateX(-50%) scaleY(1);}
-  to{transform:translateX(-50%) scaleY(1.2);}
+  to{transform:translateX(-50%) scaleY(1.3);}
 }
 
 /* DOOR */
 .door-wrapper{
-  width:240px;
-  height:280px;
-  margin:30px auto;
   position:relative;
+  width:260px;
+  height:300px;
+  margin:30px auto;
   perspective:1000px;
 }
+
 .ganesh-inside{
   position:absolute;
-  inset:0;
+  width:100%;
+  height:100%;
   display:flex;
   align-items:center;
   justify-content:center;
   background:radial-gradient(circle,#fff8dc,#ffd700);
+  border-radius:10px;
 }
+
 .ganesh-inside img{
-  width:120px;
+  width:130px;
 }
-.door-left,.door-right{
+
+.door-left,
+.door-right{
   position:absolute;
-  top:0;
   width:50%;
   height:100%;
   background:linear-gradient(#8b4513,#5a2d0c);
-  border:3px solid gold;
+  border:4px solid gold;
 }
-.door-left{ left:0; transform-origin:left; }
-.door-right{ right:0; transform-origin:right; }
 
-.open-left{ animation:openLeft 3s forwards; }
-.open-right{ animation:openRight 3s forwards; }
+.door-left{
+  left:0;
+  transform-origin:left;
+}
+
+.door-right{
+  right:0;
+  transform-origin:right;
+}
+
+.open-left{
+  animation:openLeft 3s ease forwards;
+}
+
+.open-right{
+  animation:openRight 3s ease forwards;
+}
 
 @keyframes openLeft{
-  to{ transform:rotateY(-110deg); }
+  from{transform:rotateY(0deg);}
+  to{transform:rotateY(-110deg);}
 }
+
 @keyframes openRight{
-  to{ transform:rotateY(110deg); }
+  from{transform:rotateY(0deg);}
+  to{transform:rotateY(110deg);}
 }
 
 /* HOUSE SLIDESHOW */
 .house-slideshow{
   width:100%;
-  height:280px;
+  height:300px;
   margin:25px 0;
   overflow:hidden;
+  border-radius:15px;
+  box-shadow:0 10px 25px rgba(0,0,0,0.25);
 }
+
 .house-slideshow img{
   width:100%;
   height:100%;
   object-fit:cover;
   display:none;
 }
+
 .house-slideshow img.active{
   display:block;
 }
 
 /* COUNTDOWN */
 #countdown{
-  margin:20px 0;
+  font-size:22px;
   font-weight:bold;
+  margin:20px 0;
 }
 
 /* RSVP */
@@ -172,15 +230,47 @@ body{
   background:#25D366;
   color:white;
   text-decoration:none;
-  border-radius:25px;
+  border-radius:30px;
+  font-size:18px;
   margin-top:15px;
 }
 
 /* MOBILE */
 @media(max-width:768px){
-  .slideshow{ height:45vh; }
-  .door-wrapper{ width:200px; height:240px; }
-  .house-slideshow{ height:220px; }
+
+  .slideshow{
+    height:45vh;
+  }
+
+  .invite-card{
+    padding:20px;
+    border-width:5px;
+  }
+
+  .door-wrapper{
+    width:200px;
+    height:240px;
+  }
+
+  .ganesh-inside img{
+    width:100px;
+  }
+
+  .house-slideshow{
+    height:220px;
+  }
+
+  #countdown{
+    font-size:18px;
+  }
+
+  h2{
+    font-size:20px;
+  }
+
+  h3{
+    font-size:18px;
+  }
 }
 </style>
 </head>
@@ -191,6 +281,10 @@ body{
   <h2>🙏 Welcome to Our Gruhapravesam 🙏</h2>
   <button onclick="startInvitation()">Enter Invitation</button>
 </div>
+
+<audio id="bellSound">
+  <source src="https://assets.mixkit.co/sfx/preview/mixkit-temple-bell-582.mp3" type="audio/mpeg">
+</audio>
 
 <audio id="bgMusic" loop>
   <source src="u_wmvqapau61-flute-heart-touching-289705.mp3" type="audio/mpeg">
@@ -236,7 +330,21 @@ Hassan – 573201, Karnataka
 <div class="house-slideshow">
   <img src="https://images.unsplash.com/photo-1560185127-6ed189bf02f4?auto=format&fit=crop&w=1200&q=80" class="active">
   <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80">
+  <img src="https://images.unsplash.com/photo-1599423300746-b62533397364?auto=format&fit=crop&w=1200&q=80">
 </div>
+
+<br>
+
+<iframe
+src="https://www.google.com/maps?q=Hassan,Karnataka&output=embed"
+width="100%"
+height="300"
+style="border:0;border-radius:15px;"
+allowfullscreen=""
+loading="lazy">
+</iframe>
+
+<br>
 
 <a class="rsvp" href="https://wa.me/91YOURNUMBER" target="_blank">
 💌 RSVP on WhatsApp
@@ -247,41 +355,50 @@ Hassan – 573201, Karnataka
 
 <script>
 function startInvitation(){
-  document.getElementById("startScreen").style.display="none";
-  document.getElementById("bgMusic").play();
+  const bell=document.getElementById("bellSound");
+  const music=document.getElementById("bgMusic");
+
+  bell.play();
+
+  setTimeout(()=>{
+    music.play();
+  },1500);
+
   document.querySelector(".door-left").classList.add("open-left");
   document.querySelector(".door-right").classList.add("open-right");
+
+  document.getElementById("startScreen").style.display="none";
 }
 
-/* Top slideshow */
+// Top slideshow
 let slides=document.querySelectorAll(".slideshow img");
-let i=0;
+let current=0;
 setInterval(()=>{
-  slides[i].classList.remove("active");
-  i=(i+1)%slides.length;
-  slides[i].classList.add("active");
+  slides[current].classList.remove("active");
+  current=(current+1)%slides.length;
+  slides[current].classList.add("active");
 },4000);
 
-/* House slideshow */
+// House slideshow
 let houseSlides=document.querySelectorAll(".house-slideshow img");
-let j=0;
+let houseIndex=0;
 setInterval(()=>{
-  houseSlides[j].classList.remove("active");
-  j=(j+1)%houseSlides.length;
-  houseSlides[j].classList.add("active");
+  houseSlides[houseIndex].classList.remove("active");
+  houseIndex=(houseIndex+1)%houseSlides.length;
+  houseSlides[houseIndex].classList.add("active");
 },3500);
 
-/* Countdown */
+// Countdown
 var eventDate=new Date("April 1, 2026 09:00:00").getTime();
 setInterval(()=>{
   var now=new Date().getTime();
-  var d=eventDate-now;
-  var days=Math.floor(d/(1000*60*60*24));
-  var hours=Math.floor((d%(1000*60*60*24))/(1000*60*60));
-  var minutes=Math.floor((d%(1000*60*60))/(1000*60));
-  var seconds=Math.floor((d%(1000*60))/1000);
+  var distance=eventDate-now;
+  var days=Math.floor(distance/(1000*60*60*24));
+  var hours=Math.floor((distance%(1000*60*60*24))/(1000*60*60));
+  var minutes=Math.floor((distance%(1000*60*60))/(1000*60));
+  var seconds=Math.floor((distance%(1000*60))/1000);
   document.getElementById("countdown").innerHTML=
-  "⏳ "+days+" Days "+hours+" Hours "+minutes+" Minutes "+seconds+" Seconds";
+  "⏳ Countdown: "+days+" Days "+hours+" Hours "+minutes+" Minutes "+seconds+" Seconds ";
 },1000);
 </script>
 
