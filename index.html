@@ -14,6 +14,21 @@ body{
   text-align:center;
 }
 
+/* START SCREEN */
+#startScreen{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:white;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  z-index:9999;
+}
+
 /* MAIN BACKGROUND SLIDESHOW */
 .slideshow{
   position:relative;
@@ -73,7 +88,7 @@ body{
   transform:translateX(-50%);
   width:20px;
   height:40px;
-  background:radial-gradient(circle, #fff700 0%, #ff9900 60%, transparent 70%);
+  background:radial-gradient(circle,#fff700 0%,#ff9900 60%,transparent 70%);
   border-radius:50%;
   animation:flicker 0.8s infinite alternate;
 }
@@ -175,22 +190,18 @@ body{
 
 <body>
 
-<!-- DEVOTIONAL BACKGROUND MUSIC -->
+<!-- START SCREEN -->
+<div id="startScreen">
+  <h2>🙏 Welcome 🙏</h2>
+  <button onclick="startInvitation()" style="padding:15px 30px;font-size:18px;background:#b30059;color:white;border:none;border-radius:30px;cursor:pointer;">
+    Enter Invitation
+  </button>
+</div>
+
+<!-- BACKGROUND MUSIC -->
 <audio id="bgMusic" loop>
   <source src="u_wmvqapau61-flute-heart-touching-289705.mp3" type="audio/mpeg">
 </audio>
-
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-  const audio = document.getElementById("bgMusic");
-  audio.volume = 0.6;
-
-  // Required by modern browsers
-  document.body.addEventListener("click", function () {
-      audio.play();
-  }, { once: true });
-});
-</script>
 
 <!-- BACKGROUND SLIDESHOW -->
 <div class="slideshow">
@@ -259,39 +270,43 @@ loading="lazy">
 </div>
 
 <script>
+function startInvitation(){
+  document.getElementById("bgMusic").play();
+  document.getElementById("startScreen").style.display="none";
+}
+
 // Background slideshow
-let slides = document.querySelectorAll(".slideshow img");
-let current = 0;
+let slides=document.querySelectorAll(".slideshow img");
+let current=0;
 setInterval(function(){
-  slides[current].classList.remove("active");
-  current = (current + 1) % slides.length;
-  slides[current].classList.add("active");
+slides[current].classList.remove("active");
+current=(current+1)%slides.length;
+slides[current].classList.add("active");
 },4000);
 
 // House slideshow
-let houseSlides = document.querySelectorAll(".house-slideshow img");
-let houseIndex = 0;
+let houseSlides=document.querySelectorAll(".house-slideshow img");
+let houseIndex=0;
 setInterval(function(){
-  houseSlides[houseIndex].classList.remove("active");
-  houseIndex = (houseIndex + 1) % houseSlides.length;
-  houseSlides[houseIndex].classList.add("active");
+houseSlides[houseIndex].classList.remove("active");
+houseIndex=(houseIndex+1)%houseSlides.length;
+houseSlides[houseIndex].classList.add("active");
 },3500);
 
 // Countdown
-var eventDate = new Date("April 1, 2026 09:00:00").getTime();
+var eventDate=new Date("April 1, 2026 09:00:00").getTime();
 setInterval(function(){
-  var now = new Date().getTime();
-  var distance = eventDate - now;
-  var days = Math.floor(distance / (1000*60*60*24));
-  var hours = Math.floor((distance%(1000*60*60*24))/(1000*60*60));
-  var minutes = Math.floor((distance%(1000*60*60))/(1000*60));
-  var seconds = Math.floor((distance%(1000*60))/1000);
-  document.getElementById("countdown").innerHTML =
-  "⏳ Countdown: " + days + " Days " + hours + " Hours " +
-  minutes + " Minutes " + seconds + " Seconds ";
+var now=new Date().getTime();
+var distance=eventDate-now;
+var days=Math.floor(distance/(1000*60*60*24));
+var hours=Math.floor((distance%(1000*60*60*24))/(1000*60*60));
+var minutes=Math.floor((distance%(1000*60*60))/(1000*60));
+var seconds=Math.floor((distance%(1000*60))/1000);
+document.getElementById("countdown").innerHTML=
+"⏳ Countdown: "+days+" Days "+hours+" Hours "+
+minutes+" Minutes "+seconds+" Seconds ";
 },1000);
 </script>
 
 </body>
-
 </html>
