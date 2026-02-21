@@ -6,8 +6,13 @@
 <title>Gruhapravesam Invitation - Hassan</title>
 
 <style>
+*{
+  box-sizing:border-box;
+}
+
 body{
   margin:0;
+  padding:0;
   font-family:Georgia, serif;
   background:#fdf6f0;
   color:#6b0033;
@@ -56,30 +61,35 @@ body{
   }
 }
 
-/* BACKGROUND SLIDESHOW (NOW 50% HEIGHT) */
+/* BACKGROUND SLIDESHOW - 50% HEIGHT */
 .slideshow{
-  position:relative;
   width:100%;
   height:50vh;
+  position:relative;
   overflow:hidden;
 }
 .slideshow img{
   position:absolute;
+  top:0;
+  left:0;
   width:100%;
   height:100%;
   object-fit:cover;
   opacity:0;
   transition:opacity 1.5s ease-in-out;
 }
-.slideshow img.active{ opacity:1; }
+.slideshow img.active{
+  opacity:1;
+}
 
-/* CONTENT */
+/* CONTENT BELOW SLIDESHOW */
 .content{
   width:100%;
-  padding:20px 15px;
+  padding:30px 15px;
   background:rgba(255,255,255,0.95);
 }
 
+/* INVITE CARD */
 .invite-card{
   max-width:850px;
   margin:auto;
@@ -91,15 +101,24 @@ body{
 }
 
 /* DIYA */
-.diya{ position:relative;width:60px;margin:20px auto; }
+.diya{
+  position:relative;
+  width:60px;
+  margin:20px auto;
+}
 .diya-base{
-  width:60px;height:30px;background:#b34700;
+  width:60px;
+  height:30px;
+  background:#b34700;
   border-radius:0 0 40px 40px;
 }
 .flame{
-  position:absolute;bottom:25px;left:50%;
+  position:absolute;
+  bottom:25px;
+  left:50%;
   transform:translateX(-50%);
-  width:20px;height:40px;
+  width:20px;
+  height:40px;
   background:radial-gradient(circle,#fff700 0%,#ff9900 60%,transparent 70%);
   border-radius:50%;
   animation:flicker 0.8s infinite alternate;
@@ -112,20 +131,28 @@ body{
 /* DOOR */
 .door-wrapper{
   position:relative;
-  width:260px;height:300px;
+  width:260px;
+  height:300px;
   margin:30px auto;
   perspective:1000px;
 }
 .ganesh-inside{
-  position:absolute;width:100%;height:100%;
-  display:flex;align-items:center;justify-content:center;
+  position:absolute;
+  width:100%;
+  height:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
   background:radial-gradient(circle,#fff8dc,#ffd700);
   border-radius:10px;
 }
-.ganesh-inside img{ width:130px; }
-
+.ganesh-inside img{
+  width:130px;
+}
 .door-left,.door-right{
-  position:absolute;width:50%;height:100%;
+  position:absolute;
+  width:50%;
+  height:100%;
   background:linear-gradient(#8b4513,#5a2d0c);
   border:4px solid gold;
 }
@@ -157,15 +184,19 @@ body{
 }
 .house-slideshow img{
   position:absolute;
+  top:0;
+  left:0;
   width:100%;
   height:100%;
   object-fit:cover;
   opacity:0;
   transition:opacity 1.5s ease-in-out;
 }
-.house-slideshow img.active{ opacity:1; }
+.house-slideshow img.active{
+  opacity:1;
+}
 
-/* Countdown */
+/* COUNTDOWN */
 #countdown{
   font-size:22px;
   font-weight:bold;
@@ -186,6 +217,10 @@ body{
 
 /* MOBILE RESPONSIVE */
 @media(max-width:768px){
+
+  .slideshow{
+    height:45vh;
+  }
 
   .invite-card{
     padding:15px;
@@ -372,4 +407,5 @@ setInterval(()=>{
 
 </body>
 </html>
+
 
