@@ -12,24 +12,51 @@ body{
   background:#fdf6f0;
   color:#6b0033;
   text-align:center;
+  overflow-x:hidden;
 }
 
-/* START SCREEN */
+/* ENTRY SCREEN */
 #startScreen{
   position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  background:white;
+  top:0; left:0;
+  width:100%; height:100%;
+  background:linear-gradient(to bottom,#fff8dc,#ffffff);
   display:flex;
   align-items:center;
   justify-content:center;
   flex-direction:column;
   z-index:9999;
+  transition:opacity 1.5s ease;
+}
+#startScreen button{
+  padding:15px 35px;
+  font-size:20px;
+  background:#b30059;
+  color:white;
+  border:none;
+  border-radius:40px;
+  cursor:pointer;
+  box-shadow:0 5px 15px rgba(0,0,0,0.3);
 }
 
-/* MAIN BACKGROUND SLIDESHOW */
+/* FLOWER PETALS */
+.petal{
+  position:fixed;
+  top:-50px;
+  width:15px;
+  height:15px;
+  background:pink;
+  border-radius:50%;
+  opacity:0.8;
+  animation:fall linear infinite;
+}
+@keyframes fall{
+  to{
+    transform:translateY(110vh) rotate(360deg);
+  }
+}
+
+/* BACKGROUND SLIDESHOW */
 .slideshow{
   position:relative;
   width:100%;
@@ -44,18 +71,14 @@ body{
   opacity:0;
   transition:opacity 1.5s ease-in-out;
 }
-.slideshow img.active{
-  opacity:1;
-}
+.slideshow img.active{ opacity:1; }
 
-/* CONTENT */
 .content{
   position:absolute;
-  top:0;
-  left:0;
+  top:0; left:0;
   width:100%;
   min-height:100vh;
-  background:rgba(255,255,255,0.90);
+  background:rgba(255,255,255,0.92);
   padding:20px;
 }
 
@@ -70,24 +93,15 @@ body{
 }
 
 /* DIYA */
-.diya{
-  position:relative;
-  width:60px;
-  margin:20px auto;
-}
+.diya{ position:relative;width:60px;margin:20px auto; }
 .diya-base{
-  width:60px;
-  height:30px;
-  background:#b34700;
+  width:60px;height:30px;background:#b34700;
   border-radius:0 0 40px 40px;
 }
 .flame{
-  position:absolute;
-  bottom:25px;
-  left:50%;
+  position:absolute;bottom:25px;left:50%;
   transform:translateX(-50%);
-  width:20px;
-  height:40px;
+  width:20px;height:40px;
   background:radial-gradient(circle,#fff700 0%,#ff9900 60%,transparent 70%);
   border-radius:50%;
   animation:flicker 0.8s infinite alternate;
@@ -100,41 +114,29 @@ body{
 /* DOOR */
 .door-wrapper{
   position:relative;
-  width:260px;
-  height:300px;
+  width:260px;height:300px;
   margin:30px auto;
   perspective:1000px;
 }
 .ganesh-inside{
-  position:absolute;
-  width:100%;
-  height:100%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
+  position:absolute;width:100%;height:100%;
+  display:flex;align-items:center;justify-content:center;
   background:radial-gradient(circle,#fff8dc,#ffd700);
   border-radius:10px;
 }
-.ganesh-inside img{
-  width:130px;
-}
-.door-left, .door-right{
-  position:absolute;
-  width:50%;
-  height:100%;
+.ganesh-inside img{ width:130px; }
+
+.door-left,.door-right{
+  position:absolute;width:50%;height:100%;
   background:linear-gradient(#8b4513,#5a2d0c);
   border:4px solid gold;
 }
-.door-left{
-  left:0;
-  transform-origin:left;
-  animation:openLeft 3s ease forwards;
-}
-.door-right{
-  right:0;
-  transform-origin:right;
-  animation:openRight 3s ease forwards;
-}
+.door-left{ left:0; transform-origin:left; }
+.door-right{ right:0; transform-origin:right; }
+
+.open-left{ animation:openLeft 3s ease forwards; }
+.open-right{ animation:openRight 3s ease forwards; }
+
 @keyframes openLeft{
   from{transform:rotateY(0deg);}
   to{transform:rotateY(-110deg);}
@@ -144,14 +146,7 @@ body{
   to{transform:rotateY(110deg);}
 }
 
-/* COUNTDOWN */
-#countdown{
-  font-size:22px;
-  font-weight:bold;
-  margin:20px 0;
-}
-
-/* HOUSEWARMING SLIDESHOW */
+/* HOUSE SLIDESHOW */
 .house-slideshow{
   position:relative;
   width:100%;
@@ -170,8 +165,13 @@ body{
   opacity:0;
   transition:opacity 1.5s ease-in-out;
 }
-.house-slideshow img.active{
-  opacity:1;
+.house-slideshow img.active{ opacity:1; }
+
+/* Countdown */
+#countdown{
+  font-size:22px;
+  font-weight:bold;
+  margin:20px 0;
 }
 
 /* RSVP */
@@ -190,13 +190,16 @@ body{
 
 <body>
 
-<!-- START SCREEN -->
+<!-- ENTRY SCREEN -->
 <div id="startScreen">
-  <h2>🙏 Welcome 🙏</h2>
-  <button onclick="startInvitation()" style="padding:15px 30px;font-size:18px;background:#b30059;color:white;border:none;border-radius:30px;cursor:pointer;">
-    Enter Invitation
-  </button>
+  <h2>🙏 Welcome to Our Gruhapravesam 🙏</h2>
+  <button onclick="startInvitation()">Enter Invitation</button>
 </div>
+
+<!-- TEMPLE BELL -->
+<audio id="bellSound">
+  <source src="https://assets.mixkit.co/sfx/preview/mixkit-temple-bell-582.mp3" type="audio/mpeg">
+</audio>
 
 <!-- BACKGROUND MUSIC -->
 <audio id="bgMusic" loop>
@@ -271,40 +274,66 @@ loading="lazy">
 
 <script>
 function startInvitation(){
-  document.getElementById("bgMusic").play();
-  document.getElementById("startScreen").style.display="none";
+  const bell=document.getElementById("bellSound");
+  const music=document.getElementById("bgMusic");
+
+  bell.play();
+
+  setTimeout(()=>{
+    music.volume=0;
+    music.play();
+    let fade=setInterval(()=>{
+      if(music.volume<0.6){
+        music.volume+=0.05;
+      }else{ clearInterval(fade); }
+    },200);
+  },1500);
+
+  document.querySelector(".door-left").classList.add("open-left");
+  document.querySelector(".door-right").classList.add("open-right");
+
+  document.getElementById("startScreen").style.opacity="0";
+  setTimeout(()=>{ document.getElementById("startScreen").style.display="none"; },1500);
+
+  for(let i=0;i<25;i++){
+    let petal=document.createElement("div");
+    petal.className="petal";
+    petal.style.left=Math.random()*100+"vw";
+    petal.style.animationDuration=(3+Math.random()*5)+"s";
+    document.body.appendChild(petal);
+  }
 }
 
 // Background slideshow
 let slides=document.querySelectorAll(".slideshow img");
 let current=0;
-setInterval(function(){
-slides[current].classList.remove("active");
-current=(current+1)%slides.length;
-slides[current].classList.add("active");
+setInterval(()=>{
+  slides[current].classList.remove("active");
+  current=(current+1)%slides.length;
+  slides[current].classList.add("active");
 },4000);
 
 // House slideshow
 let houseSlides=document.querySelectorAll(".house-slideshow img");
 let houseIndex=0;
-setInterval(function(){
-houseSlides[houseIndex].classList.remove("active");
-houseIndex=(houseIndex+1)%houseSlides.length;
-houseSlides[houseIndex].classList.add("active");
+setInterval(()=>{
+  houseSlides[houseIndex].classList.remove("active");
+  houseIndex=(houseIndex+1)%houseSlides.length;
+  houseSlides[houseIndex].classList.add("active");
 },3500);
 
 // Countdown
 var eventDate=new Date("April 1, 2026 09:00:00").getTime();
-setInterval(function(){
-var now=new Date().getTime();
-var distance=eventDate-now;
-var days=Math.floor(distance/(1000*60*60*24));
-var hours=Math.floor((distance%(1000*60*60*24))/(1000*60*60));
-var minutes=Math.floor((distance%(1000*60*60))/(1000*60));
-var seconds=Math.floor((distance%(1000*60))/1000);
-document.getElementById("countdown").innerHTML=
-"⏳ Countdown: "+days+" Days "+hours+" Hours "+
-minutes+" Minutes "+seconds+" Seconds ";
+setInterval(()=>{
+  var now=new Date().getTime();
+  var distance=eventDate-now;
+  var days=Math.floor(distance/(1000*60*60*24));
+  var hours=Math.floor((distance%(1000*60*60*24))/(1000*60*60));
+  var minutes=Math.floor((distance%(1000*60*60))/(1000*60));
+  var seconds=Math.floor((distance%(1000*60))/1000);
+  document.getElementById("countdown").innerHTML=
+  "⏳ Countdown: "+days+" Days "+hours+" Hours "+
+  minutes+" Minutes "+seconds+" Seconds ";
 },1000);
 </script>
 
