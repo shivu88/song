@@ -56,11 +56,11 @@ body{
   }
 }
 
-/* BACKGROUND SLIDESHOW */
+/* BACKGROUND SLIDESHOW (NOW 50% HEIGHT) */
 .slideshow{
   position:relative;
   width:100%;
-  height:100vh;
+  height:50vh;
   overflow:hidden;
 }
 .slideshow img{
@@ -73,13 +73,11 @@ body{
 }
 .slideshow img.active{ opacity:1; }
 
+/* CONTENT */
 .content{
-  position:absolute;
-  top:0; left:0;
   width:100%;
-  min-height:100vh;
-  background:rgba(255,255,255,0.92);
-  padding:20px;
+  padding:20px 15px;
+  background:rgba(255,255,255,0.95);
 }
 
 .invite-card{
@@ -151,7 +149,7 @@ body{
   position:relative;
   width:100%;
   max-width:800px;
-  height:400px;
+  height:300px;
   margin:30px auto;
   overflow:hidden;
   border-radius:15px;
@@ -184,6 +182,41 @@ body{
   border-radius:30px;
   font-size:18px;
   margin-top:15px;
+}
+
+/* MOBILE RESPONSIVE */
+@media(max-width:768px){
+
+  .invite-card{
+    padding:15px;
+    border-width:5px;
+  }
+
+  .door-wrapper{
+    width:200px;
+    height:240px;
+  }
+
+  .ganesh-inside img{
+    width:100px;
+  }
+
+  .house-slideshow{
+    height:220px;
+  }
+
+  #countdown{
+    font-size:18px;
+  }
+
+  h2{
+    font-size:20px;
+  }
+
+  h3{
+    font-size:18px;
+  }
+
 }
 </style>
 </head>
@@ -339,3 +372,4 @@ setInterval(()=>{
 
 </body>
 </html>
+
