@@ -176,14 +176,19 @@ body{
 <body>
 
 <!-- DEVOTIONAL BACKGROUND MUSIC -->
-<audio id="bgMusic" autoplay loop>
-  <source src="https://github.com/shivu88/song/blob/main/u_wmvqapau61-flute-heart-touching-289705.mp3" type="audio/mpeg">
+<audio id="bgMusic" loop>
+  <source src="u_wmvqapau61-flute-heart-touching-289705.mp3" type="audio/mpeg">
 </audio>
 
 <script>
-// Autoplay fix for mobile
-document.addEventListener("click", function() {
-  document.getElementById("bgMusic").play();
+document.addEventListener("DOMContentLoaded", function () {
+  const audio = document.getElementById("bgMusic");
+  audio.volume = 0.6;
+
+  // Required by modern browsers
+  document.body.addEventListener("click", function () {
+      audio.play();
+  }, { once: true });
 });
 </script>
 
@@ -288,4 +293,5 @@ setInterval(function(){
 </script>
 
 </body>
+
 </html>
