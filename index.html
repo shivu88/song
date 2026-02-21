@@ -17,276 +17,185 @@ body{
   background:#fdf6f0;
   color:#6b0033;
   text-align:center;
-  overflow-x:hidden;
 }
 
 /* ENTRY SCREEN */
 #startScreen{
   position:fixed;
-  top:0; left:0;
-  width:100%; height:100%;
+  inset:0;
   background:linear-gradient(to bottom,#fff8dc,#ffffff);
   display:flex;
   align-items:center;
   justify-content:center;
   flex-direction:column;
   z-index:9999;
-  transition:opacity 1.5s ease;
 }
 
 #startScreen button{
-  padding:15px 35px;
-  font-size:20px;
+  padding:14px 30px;
+  font-size:18px;
   background:#b30059;
   color:white;
   border:none;
-  border-radius:40px;
+  border-radius:30px;
   cursor:pointer;
-  box-shadow:0 5px 15px rgba(0,0,0,0.3);
 }
 
-/* FLOWER PETALS */
-.petal{
-  position:fixed;
-  top:-50px;
-  width:15px;
-  height:15px;
-  background:pink;
-  border-radius:50%;
-  opacity:0.8;
-  animation:fall linear infinite;
-}
-
-@keyframes fall{
-  to{
-    transform:translateY(110vh) rotate(360deg);
-  }
-}
-
-/* BACKGROUND SLIDESHOW */
+/* SLIDESHOW (50% HEIGHT) */
 .slideshow{
   width:100%;
   height:50vh;
-  position:relative;
   overflow:hidden;
 }
 
 .slideshow img{
-  position:absolute;
-  top:0;
-  left:0;
   width:100%;
   height:100%;
   object-fit:cover;
-  opacity:0;
-  transition:opacity 1.5s ease-in-out;
+  display:none;
 }
 
 .slideshow img.active{
-  opacity:1;
+  display:block;
 }
 
-/* CONTENT SECTION */
+/* CONTENT */
 .content{
-  width:100%;
-  display:flex;
-  justify-content:center;
-  padding:50px 15px;
-  background:#fdf6f0;
+  padding:40px 15px;
 }
 
-/* INVITATION CARD */
 .invite-card{
-  width:100%;
   max-width:900px;
-  padding:30px;
-  border:8px solid #b30059;
-  border-radius:20px;
+  margin:auto;
   background:white;
-  box-shadow:0 20px 45px rgba(0,0,0,0.25);
+  padding:30px;
+  border-radius:20px;
+  border:6px solid #b30059;
+  box-shadow:0 10px 30px rgba(0,0,0,0.2);
 }
 
 /* DIYA */
 .diya{
-  position:relative;
   width:60px;
   margin:20px auto;
+  position:relative;
 }
-
 .diya-base{
   width:60px;
   height:30px;
   background:#b34700;
   border-radius:0 0 40px 40px;
 }
-
 .flame{
   position:absolute;
   bottom:25px;
   left:50%;
   transform:translateX(-50%);
-  width:20px;
-  height:40px;
-  background:radial-gradient(circle,#fff700 0%,#ff9900 60%,transparent 70%);
+  width:18px;
+  height:35px;
+  background:radial-gradient(circle,#fff700 0%,#ff9900 70%,transparent 80%);
   border-radius:50%;
   animation:flicker 0.8s infinite alternate;
 }
-
 @keyframes flicker{
   from{transform:translateX(-50%) scaleY(1);}
-  to{transform:translateX(-50%) scaleY(1.3);}
+  to{transform:translateX(-50%) scaleY(1.2);}
 }
 
 /* DOOR */
 .door-wrapper{
-  position:relative;
-  width:260px;
-  height:300px;
+  width:240px;
+  height:280px;
   margin:30px auto;
+  position:relative;
   perspective:1000px;
 }
-
 .ganesh-inside{
   position:absolute;
-  width:100%;
-  height:100%;
+  inset:0;
   display:flex;
   align-items:center;
   justify-content:center;
   background:radial-gradient(circle,#fff8dc,#ffd700);
-  border-radius:10px;
 }
-
 .ganesh-inside img{
-  width:130px;
+  width:120px;
 }
-
 .door-left,.door-right{
   position:absolute;
+  top:0;
   width:50%;
   height:100%;
   background:linear-gradient(#8b4513,#5a2d0c);
-  border:4px solid gold;
+  border:3px solid gold;
 }
-
 .door-left{ left:0; transform-origin:left; }
 .door-right{ right:0; transform-origin:right; }
 
-.open-left{ animation:openLeft 3s ease forwards; }
-.open-right{ animation:openRight 3s ease forwards; }
+.open-left{ animation:openLeft 3s forwards; }
+.open-right{ animation:openRight 3s forwards; }
 
 @keyframes openLeft{
-  from{transform:rotateY(0deg);}
-  to{transform:rotateY(-110deg);}
+  to{ transform:rotateY(-110deg); }
 }
-
 @keyframes openRight{
-  from{transform:rotateY(0deg);}
-  to{transform:rotateY(110deg);}
+  to{ transform:rotateY(110deg); }
 }
 
 /* HOUSE SLIDESHOW */
 .house-slideshow{
   width:100%;
-  height:300px;
+  height:280px;
   margin:25px 0;
-  position:relative;
   overflow:hidden;
-  border-radius:15px;
-  box-shadow:0 10px 25px rgba(0,0,0,0.25);
 }
-
 .house-slideshow img{
-  position:absolute;
   width:100%;
   height:100%;
   object-fit:cover;
-  opacity:0;
-  transition:opacity 1.5s ease-in-out;
+  display:none;
 }
-
 .house-slideshow img.active{
-  opacity:1;
+  display:block;
 }
 
 /* COUNTDOWN */
 #countdown{
-  font-size:22px;
-  font-weight:bold;
   margin:20px 0;
+  font-weight:bold;
 }
 
-/* RSVP BUTTON */
+/* RSVP */
 .rsvp{
   display:inline-block;
   padding:12px 25px;
   background:#25D366;
   color:white;
   text-decoration:none;
-  border-radius:30px;
-  font-size:18px;
+  border-radius:25px;
   margin-top:15px;
 }
 
-/* MOBILE RESPONSIVE */
+/* MOBILE */
 @media(max-width:768px){
-
-  .slideshow{
-    height:45vh;
-  }
-
-  .invite-card{
-    padding:20px;
-    border-width:5px;
-  }
-
-  .door-wrapper{
-    width:200px;
-    height:240px;
-  }
-
-  .ganesh-inside img{
-    width:100px;
-  }
-
-  .house-slideshow{
-    height:220px;
-  }
-
-  #countdown{
-    font-size:18px;
-  }
-
-  h2{
-    font-size:20px;
-  }
-
-  h3{
-    font-size:18px;
-  }
+  .slideshow{ height:45vh; }
+  .door-wrapper{ width:200px; height:240px; }
+  .house-slideshow{ height:220px; }
 }
 </style>
 </head>
 
 <body>
 
-<!-- ENTRY SCREEN -->
 <div id="startScreen">
   <h2>🙏 Welcome to Our Gruhapravesam 🙏</h2>
   <button onclick="startInvitation()">Enter Invitation</button>
 </div>
 
-<!-- TEMPLE BELL -->
-<audio id="bellSound">
-  <source src="https://assets.mixkit.co/sfx/preview/mixkit-temple-bell-582.mp3" type="audio/mpeg">
-</audio>
-
-<!-- BACKGROUND MUSIC -->
 <audio id="bgMusic" loop>
   <source src="u_wmvqapau61-flute-heart-touching-289705.mp3" type="audio/mpeg">
 </audio>
 
-<!-- BACKGROUND SLIDESHOW -->
 <div class="slideshow">
   <img src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=1600&q=80" class="active">
   <img src="https://images.unsplash.com/photo-1572120360610-d971b9d7767c?auto=format&fit=crop&w=1600&q=80">
@@ -313,8 +222,6 @@ body{
 
 <h2>🏡 Gruhapravesam Invitation 🏡</h2>
 
-<h3>Mr. & Mrs. [Your Name Here]</h3>
-
 <p>
 📅 April 1, 2026 <br>
 🕒 9:00 AM onwards <br>
@@ -329,21 +236,7 @@ Hassan – 573201, Karnataka
 <div class="house-slideshow">
   <img src="https://images.unsplash.com/photo-1560185127-6ed189bf02f4?auto=format&fit=crop&w=1200&q=80" class="active">
   <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80">
-  <img src="https://images.unsplash.com/photo-1599423300746-b62533397364?auto=format&fit=crop&w=1200&q=80">
 </div>
-
-<br>
-
-<iframe
-src="https://www.google.com/maps?q=Hassan,Karnataka&output=embed"
-width="100%"
-height="300"
-style="border:0;border-radius:15px;"
-allowfullscreen=""
-loading="lazy">
-</iframe>
-
-<br>
 
 <a class="rsvp" href="https://wa.me/91YOURNUMBER" target="_blank">
 💌 RSVP on WhatsApp
@@ -354,72 +247,43 @@ loading="lazy">
 
 <script>
 function startInvitation(){
-  const bell=document.getElementById("bellSound");
-  const music=document.getElementById("bgMusic");
-
-  bell.play();
-
-  setTimeout(()=>{
-    music.volume=0;
-    music.play();
-    let fade=setInterval(()=>{
-      if(music.volume<0.6){
-        music.volume+=0.05;
-      }else{ clearInterval(fade); }
-    },200);
-  },1500);
-
+  document.getElementById("startScreen").style.display="none";
+  document.getElementById("bgMusic").play();
   document.querySelector(".door-left").classList.add("open-left");
   document.querySelector(".door-right").classList.add("open-right");
-
-  document.getElementById("startScreen").style.opacity="0";
-  setTimeout(()=>{ document.getElementById("startScreen").style.display="none"; },1500);
-
-  for(let i=0;i<25;i++){
-    let petal=document.createElement("div");
-    petal.className="petal";
-    petal.style.left=Math.random()*100+"vw";
-    petal.style.animationDuration=(3+Math.random()*5)+"s";
-    document.body.appendChild(petal);
-  }
 }
 
-// Background slideshow
+/* Top slideshow */
 let slides=document.querySelectorAll(".slideshow img");
-let current=0;
+let i=0;
 setInterval(()=>{
-  slides[current].classList.remove("active");
-  current=(current+1)%slides.length;
-  slides[current].classList.add("active");
+  slides[i].classList.remove("active");
+  i=(i+1)%slides.length;
+  slides[i].classList.add("active");
 },4000);
 
-// House slideshow
+/* House slideshow */
 let houseSlides=document.querySelectorAll(".house-slideshow img");
-let houseIndex=0;
+let j=0;
 setInterval(()=>{
-  houseSlides[houseIndex].classList.remove("active");
-  houseIndex=(houseIndex+1)%houseSlides.length;
-  houseSlides[houseIndex].classList.add("active");
+  houseSlides[j].classList.remove("active");
+  j=(j+1)%houseSlides.length;
+  houseSlides[j].classList.add("active");
 },3500);
 
-// Countdown
+/* Countdown */
 var eventDate=new Date("April 1, 2026 09:00:00").getTime();
 setInterval(()=>{
   var now=new Date().getTime();
-  var distance=eventDate-now;
-  var days=Math.floor(distance/(1000*60*60*24));
-  var hours=Math.floor((distance%(1000*60*60*24))/(1000*60*60));
-  var minutes=Math.floor((distance%(1000*60*60))/(1000*60));
-  var seconds=Math.floor((distance%(1000*60))/1000);
+  var d=eventDate-now;
+  var days=Math.floor(d/(1000*60*60*24));
+  var hours=Math.floor((d%(1000*60*60*24))/(1000*60*60));
+  var minutes=Math.floor((d%(1000*60*60))/(1000*60));
+  var seconds=Math.floor((d%(1000*60))/1000);
   document.getElementById("countdown").innerHTML=
-  "⏳ Countdown: "+days+" Days "+hours+" Hours "+
-  minutes+" Minutes "+seconds+" Seconds ";
+  "⏳ "+days+" Days "+hours+" Hours "+minutes+" Minutes "+seconds+" Seconds";
 },1000);
 </script>
 
 </body>
 </html>
-
-
-
-
